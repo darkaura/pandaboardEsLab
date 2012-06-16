@@ -1,0 +1,15 @@
+usb start
+setenv autoload no
+setenv ipaddr 192.168.1.2
+setenv serverip 192.168.1.1
+setenv bootfile uImage
+setenv console console=ttyO2,115200n8 androidboot.console=ttyO2
+setenv memory mem=456M@0x80000000 mem=512M@0xA0000000
+setenv vmem  vram="32M" omapfb.vram=0:16M
+setenv display omapdss.def_disp=hdmi consoleblank=0
+setenv rootfs root=/dev/nfs rw nfsroot=192.168.1.1:/panda/fs,nolock,wsize=1024,rsize=1024 ip=192.168.1.2 rootdelay=2 init=/init
+setenv bootargs ${console} ${memory} ${rootfs} ${vmem} ${display}
+setenv bootcmd 'tftp 0x80000000 uImage;bootm 0x80000000'
+boot
+
+
